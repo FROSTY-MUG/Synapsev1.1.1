@@ -113,10 +113,9 @@ export default function AppWindow({
       }}
       exit={{ opacity: 0, scale: 0.88, y: 40, filter: 'blur(8px)' }}
       transition={{ 
-        type: 'spring', 
-        damping: 22, 
-        stiffness: 260, 
-        mass: 0.65 
+        type: 'tween',
+        duration: 0.18,
+        ease: 'easeOut'
       }}
       className={`absolute macos-glass macos-window-shadow flex flex-col overflow-hidden pointer-events-auto border-2 transition-all duration-300 ${
         isActive 
@@ -139,9 +138,7 @@ export default function AppWindow({
         {/* Left Side Container */}
         <div className="flex items-center w-28">
           {controlPosition === 'left' ? (
-            <motion.div layout id={`controls-${app.id}`} transition={{ type: 'spring', damping: 25, stiffness: 300 }}>
-              {renderWindowControls()}
-            </motion.div>
+            <div>{renderWindowControls()}</div>
           ) : (
             <div className="w-28" />
           )}
@@ -158,9 +155,7 @@ export default function AppWindow({
         {/* Right Side Container */}
         <div className="flex items-center justify-end w-28">
           {controlPosition === 'right' ? (
-            <motion.div layout id={`controls-${app.id}`} transition={{ type: 'spring', damping: 25, stiffness: 300 }}>
-              {renderWindowControls()}
-            </motion.div>
+            <div>{renderWindowControls()}</div>
           ) : (
             <div className="w-28" />
           )}

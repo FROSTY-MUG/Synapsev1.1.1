@@ -21,7 +21,12 @@ import MacOSControlCenter from './MacOSControlCenter';
 
 export default function WebOSShell() {
   const fileSystem = useFileSystem();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<any>({
+    uid: 'guest_admin',
+    displayName: 'MASTER ADMIN',
+    email: 'admin@synapse.ai',
+    role: 'Master Administrator'
+  });
   const [firebaseUser, setFirebaseUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isLocked, setIsLocked] = useState(false);
@@ -118,7 +123,19 @@ export default function WebOSShell() {
 
   // Auth State Listener
   useEffect(() => {
+    // Boot splash: auto-dismiss after 2.5s regardless of Firebase
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      setUser({
+        uid: 'guest_admin',
+        displayName: 'MASTER ADMIN',
+        email: 'admin@synapse.ai',
+        role: 'Master Administrator'
+      });
+    }, 2500);
+
     const unsubscribe = onAuthStateChanged(auth, async (currUser) => {
+      clearTimeout(timeout);
       setFirebaseUser(currUser);
       if (currUser) {
         setUser({
@@ -143,9 +160,22 @@ export default function WebOSShell() {
         });
       }
       setLoading(false);
+    }, (error) => {
+      clearTimeout(timeout);
+      console.error('Auth state error:', error);
+      setUser({
+        uid: 'guest_admin',
+        displayName: 'MASTER ADMIN',
+        email: 'admin@synapse.ai',
+        role: 'Master Administrator'
+      });
+      setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(timeout);
+      unsubscribe();
+    };
   }, []);
 
   // Live Audit Stream

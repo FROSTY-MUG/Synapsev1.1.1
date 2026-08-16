@@ -15,15 +15,22 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://synapse.dev'),
   title: 'Synapse OS — AI-Native CFO Operating System',
   description: 'Enterprise-grade AI operating system for finance teams. Real-time financial intelligence, autonomous agents, and predictive analytics.',
-  themeColor: '#050508',
+  alternates: {
+    canonical: '/',
+  }
 };
+import { ClientProviders } from '@/components/Providers';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body suppressHydrationWarning>{children}</body>
+    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body>
+        <ClientProviders />
+        {children}
+      </body>
     </html>
   );
 }

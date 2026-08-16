@@ -24,7 +24,9 @@ import {
   Music2,
   Mic,
   Mail as MailIcon,
-  Bot
+  Bot,
+  Info,
+  Layers
 } from 'lucide-react';
 
 import Dashboard from '@/components/apps/Dashboard';
@@ -51,6 +53,8 @@ import SynapseMusic from '@/components/apps/SynapseMusic';
 import MailApp from '@/components/apps/Mail';
 import AssistantApp from '@/components/apps/Assistant';
 import VoiceApp from '@/components/apps/VoiceApp';
+import AboutApp from '@/components/apps/AboutApp';
+import ServicesApp from '@/components/apps/ServicesApp';
 
 export type AppId = 
   | 'dashboard' 
@@ -76,7 +80,9 @@ export type AppId =
   | 'music'
   | 'voice'
   | 'mail'
-  | 'assistant';
+  | 'assistant'
+  | 'about'
+  | 'services';
 
 export interface AppDefinition {
   id: AppId;
@@ -111,6 +117,8 @@ export const AppRegistry: AppDefinition[] = [
   { id: 'music', name: 'Music', icon: Music, color: 'bg-gradient-to-br from-indigo-500 to-purple-600', component: SynapseMusic },
   { id: 'voice', name: 'Voice', icon: Mic, color: 'bg-gradient-to-br from-blue-400 to-indigo-500', component: VoiceApp },
   { id: 'settings', name: 'Settings', icon: Settings, color: 'bg-gradient-to-br from-zinc-500 to-zinc-700', component: SettingsApp },
+  { id: 'about', name: 'About Synapse', icon: Info, color: 'bg-gradient-to-br from-cyan-500 to-blue-600', component: AboutApp },
+  { id: 'services', name: 'Services', icon: Layers, color: 'bg-gradient-to-br from-purple-500 to-pink-600', component: ServicesApp },
   { id: 'budgetbrain', name: 'BudgetBrain', icon: PieChart, color: 'bg-gradient-to-br from-violet-500 to-purple-700', component: BudgetBrain, hidden: true },
   { id: 'treasury', name: 'Treasury', icon: Landmark, color: 'bg-gradient-to-br from-indigo-500 to-indigo-700', component: Treasury, hidden: true },
   { id: 'datamarket', name: 'DataMarket', icon: ShoppingBag, color: 'bg-gradient-to-br from-pink-400 to-pink-600', component: DataMarket, hidden: true },

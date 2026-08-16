@@ -98,11 +98,41 @@
 }
 
 body {
-  background-color: #07070a;
-  color: #ffffff;
+  background-color: #07070a !important;
+  color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Outfit", "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
   letter-spacing: -0.01em;
+}
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  header, nav, footer, .no-print {
+    display: none !important;
+  }
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background: transparent !important;
+  }
+}
+
+@keyframes accordion-down {
+  from { height: 0 }
+  to { height: var(--radix-accordion-content-height) }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to { height: 0 }
+}
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }
